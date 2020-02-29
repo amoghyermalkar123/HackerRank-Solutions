@@ -25,10 +25,8 @@ def do_bfs(graph, start_node, key, nodes):
         path_matrix.append(a_row)
         # EOF : path_matrix
 
-    # TODO : DO DEBUGGING FOR THIS PART : ......................... (check how you're building your path matrix)
     while queue:
         popped_node = queue.pop(0)
-        print("POPPED NODE", popped_node, "QUEUE", queue)
         for neighbor in graph[popped_node]:
             if neighbor not in visited:
                 path_matrix[popped_node - 1][neighbor - 1] = 6
@@ -42,7 +40,6 @@ def do_bfs(graph, start_node, key, nodes):
         elif not keyFound and len(queue) == 0:
             print("key unreachable")
             return -1
-    # ..............................................................
     distance = cal(key, start_node, path_matrix)
     return distance
 
@@ -81,19 +78,16 @@ def bfs(no_of_nodes, no_of_edges, edge_pair, startNode):
     for node in _all_nodes:
         graph[node] = get_ngh(node, edge_pair)
 
-    return graph
-    # for a_node in _all_nodes:
-    #     if len(graph[a_node]) == 0:
-    #         _distances.append(-1)
-    #     elif a_node == startNode:
-    #         continue
-    #     else:
-    #         dist = do_bfs(graph, startNode, a_node, _all_nodes)
-    #         # print("dist of node {} is {}".format(a_node, dist))
-    #         _distances.append(dist)
-    # # dist = do_bfs(graph, startNode, 2, _all_nodes)
-    # # _distances.append(dist)
-    # return _distances
+    for a_node in _all_nodes:
+        if len(graph[a_node]) == 0:
+            _distances.append(-1)
+        elif a_node == startNode:
+            continue
+        else:
+            dist = do_bfs(graph, startNode, a_node, _all_nodes)
+            # print("dist of node {} is {}".format(a_node, dist))
+            _distances.append(dist)
+    return _distances
 
 
 if __name__ == "__main__":
@@ -102,7 +96,8 @@ if __name__ == "__main__":
     print(distance)
 
 """
-
+    Some pre-prepared graphs :
+    
     edge_list = [[1, 2], [1, 3], [2, 4], [2, 5], [3, 6], [3, 7], [5, 8]]
     distance = bfs(9, 7, edge_list, 1)
 
